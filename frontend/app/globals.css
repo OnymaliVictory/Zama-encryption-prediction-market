@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Variables ────────────────────────────────────────── */
+:root {
+  --color-gold:      #F59E0B;
+  --color-gold-lt:   #FCD34D;
+  --color-gold-dk:   #D97706;
+  --color-bg:        #FAFAFA;
+  --color-surface:   #FFFFFF;
+  --color-border:    #E4E4E7;
+  --color-text:      #18181B;
+  --color-muted:     #71717A;
+  --radius:          12px;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Typography ───────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Syne', sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-mono-nums {
+  font-family: 'DM Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D4D4D8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #A1A1AA; }
+
+/* ── Animations ───────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
+  70%  { box-shadow: 0 0 0 10px rgba(245,158,11,0); }
+  100% { box-shadow: 0 0 0 0 rgba(245,158,11,0); }
+}
+@keyframes encrypt-reveal {
+  0%   { opacity: 1; filter: blur(0); }
+  50%  { opacity: 0.5; filter: blur(2px); }
+  100% { opacity: 1; filter: blur(0); letter-spacing: 0.3em; color: var(--color-gold); }
+}
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-fade-in-up    { animation: fadeInUp 0.5s ease-out both; }
+.animate-fade-in       { animation: fadeIn   0.4s ease-out both; }
+.animate-pulse-ring    { animation: pulse-ring 2s ease-out infinite; }
+.animate-ticker-scroll { animation: ticker-scroll 30s linear infinite; }
+
+/* ── Stagger delays ─────────────────────────────────────────  */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s;  }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s;  }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s;  }
+
+/* ── Shimmer loading state ──────────────────────────────────── */
+.shimmer {
+  background: linear-gradient(90deg, #F4F4F5 25%, #E4E4E7 50%, #F4F4F5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+}
+
+/* ── Gold gradient text ─────────────────────────────────────── */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B, #D97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Encrypted text effect ──────────────────────────────────── */
+.encrypted-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--color-gold);
+  word-break: break-all;
+}
+
+/* ── Card hover lift ────────────────────────────────────────── */
+.card-lift {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+/* ── Gold button ─────────────────────────────────────────────── */
+.btn-gold {
+  background: linear-gradient(135deg, #FBBF24, #F59E0B);
+  color: #18181B;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(245,158,11,0.3);
+}
+.btn-gold:hover:not(:disabled) {
+  background: linear-gradient(135deg, #FCD34D, #FBBF24);
+  box-shadow: 0 4px 16px rgba(245,158,11,0.45);
+  transform: translateY(-1px);
+}
+.btn-gold:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(245,158,11,0.3);
+}
+.btn-gold:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── YES / NO choice buttons ─────────────────────────────────── */
+.btn-yes {
+  background: #F0FDF4;
+  color: #15803D;
+  border: 2px solid #BBF7D0;
+  transition: all 0.15s ease;
+}
+.btn-yes:hover, .btn-yes.active {
+  background: #16A34A;
+  color: white;
+  border-color: #16A34A;
+  box-shadow: 0 4px 14px rgba(22,163,74,0.3);
+}
+.btn-no {
+  background: #FFF1F2;
+  color: #BE123C;
+  border: 2px solid #FECDD3;
+  transition: all 0.15s ease;
+}
+.btn-no:hover, .btn-no.active {
+  background: #E11D48;
+  color: white;
+  border-color: #E11D48;
+  box-shadow: 0 4px 14px rgba(225,29,72,0.3);
+}
+
+/* ── Badge ───────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Syne', sans-serif;
+  letter-spacing: 0.03em;
+}
+
+/* ── Modal overlay ───────────────────────────────────────────── */
+.modal-overlay {
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.5);
+}
+
+/* ── Ticker bar ──────────────────────────────────────────────── */
+.ticker-bar {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* ── Privacy terminal ────────────────────────────────────────── */
+.terminal {
+  background: #09090B;
+  color: #22C55E;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  padding: 16px;
+  overflow-x: auto;
+}
+.terminal .comment { color: #71717A; }
+.terminal .key     { color: #FBBF24; }
+.terminal .value   { color: #34D399; }
+.terminal .cipher  { color: #A78BFA; }
+
+/* ── Progress bar ────────────────────────────────────────────── */
+.progress-bar {
+  height: 8px;
+  border-radius: 99px;
+  overflow: hidden;
+  background: #F4F4F5;
+}
+.progress-fill-yes {
+  height: 100%;
+  background: linear-gradient(90deg, #4ADE80, #22C55E);
+  transition: width 0.6s ease;
+}
+.progress-fill-no {
+  height: 100%;
+  background: linear-gradient(90deg, #FB7185, #E11D48);
+  transition: width 0.6s ease;
+}
+
+/* ── Responsive tweaks ───────────────────────────────────────── */
+@media (max-width: 640px) {
+  .text-hero {
+    font-size: 2.5rem !important;
+    line-height: 1.15 !important;
+  }
+}

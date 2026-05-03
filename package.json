@@ -1,0 +1,22 @@
+{
+  "name": "private-prediction-market-contracts",
+  "version": "1.0.0",
+  "description": "FHE-powered private prediction market smart contracts",
+  "scripts": {
+    "compile": "hardhat compile",
+    "test": "hardhat test",
+    "deploy:sepolia": "hardhat run scripts/deploy.js --network sepolia",
+    "deploy:local": "hardhat run scripts/deploy.js --network hardhat",
+    "node": "hardhat node",
+    "verify": "hardhat verify --network sepolia"
+  },
+  "dependencies": {
+    "fhevm": "^0.6.2",
+    "@openzeppelin/contracts": "^5.0.2"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.0"
+  }
+}
