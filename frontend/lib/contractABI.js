@@ -10,13 +10,13 @@ export const CONTRACT_ABI = [
     "inputs": [{ "internalType": "uint256", "name": "marketId", "type": "uint256" }],
     "name": "getMarket",
     "outputs": [
-      { "internalType": "string",  "name": "question",       "type": "string" },
-      { "internalType": "string",  "name": "category",       "type": "string" },
+      { "internalType": "string",  "name": "question",       "type": "string"  },
+      { "internalType": "string",  "name": "category",       "type": "string"  },
       { "internalType": "uint256", "name": "endTime",        "type": "uint256" },
       { "internalType": "uint256", "name": "totalEthPool",   "type": "uint256" },
-      { "internalType": "bool",    "name": "resolved",       "type": "bool" },
-      { "internalType": "bool",    "name": "winningOutcome", "type": "bool" },
-      { "internalType": "bool",    "name": "exists",         "type": "bool" },
+      { "internalType": "bool",    "name": "resolved",       "type": "bool"    },
+      { "internalType": "bool",    "name": "winningOutcome", "type": "bool"    },
+      { "internalType": "bool",    "name": "exists",         "type": "bool"    },
       { "internalType": "uint256", "name": "betCount",       "type": "uint256" }
     ],
     "stateMutability": "view",
@@ -29,8 +29,8 @@ export const CONTRACT_ABI = [
     ],
     "name": "getUserBetStatus",
     "outputs": [
-      { "internalType": "bool",    "name": "hasBet",    "type": "bool" },
-      { "internalType": "bool",    "name": "claimed",   "type": "bool" },
+      { "internalType": "bool",    "name": "hasBet",    "type": "bool"    },
+      { "internalType": "bool",    "name": "claimed",   "type": "bool"    },
       { "internalType": "uint256", "name": "ethAmount", "type": "uint256" }
     ],
     "stateMutability": "view",
@@ -51,12 +51,13 @@ export const CONTRACT_ABI = [
     "type": "function"
   },
   {
+    // ✅ FIXED — einput types match new FHEVM contract
     "inputs": [
-      { "internalType": "uint256", "name": "marketId",        "type": "uint256" },
-      { "internalType": "bytes32", "name": "encryptedAmount", "type": "bytes32" },
-      { "internalType": "bytes",   "name": "amountProof",     "type": "bytes"   },
-      { "internalType": "bytes32", "name": "encryptedChoice", "type": "bytes32" },
-      { "internalType": "bytes",   "name": "choiceProof",     "type": "bytes"   }
+      { "internalType": "uint256",  "name": "marketId",        "type": "uint256" },
+      { "internalType": "bytes32",  "name": "encryptedAmount", "type": "bytes32" },
+      { "internalType": "bytes",    "name": "amountProof",     "type": "bytes"   },
+      { "internalType": "bytes32",  "name": "encryptedChoice", "type": "bytes32" },
+      { "internalType": "bytes",    "name": "choiceProof",     "type": "bytes"   }
     ],
     "name": "placeBet",
     "outputs": [],
@@ -66,7 +67,7 @@ export const CONTRACT_ABI = [
   {
     "inputs": [
       { "internalType": "uint256", "name": "marketId", "type": "uint256" },
-      { "internalType": "bool",    "name": "outcome",  "type": "bool" }
+      { "internalType": "bool",    "name": "outcome",  "type": "bool"    }
     ],
     "name": "resolveMarket",
     "outputs": [],
@@ -91,11 +92,11 @@ export const CONTRACT_ABI = [
     "type": "event"
   },
   {
+    // ✅ FIXED — removed ethAmount from event
     "anonymous": false,
     "inputs": [
-      { "indexed": true,  "internalType": "uint256", "name": "marketId",  "type": "uint256" },
-      { "indexed": true,  "internalType": "address", "name": "user",      "type": "address" },
-      { "indexed": false, "internalType": "uint256", "name": "ethAmount", "type": "uint256" }
+      { "indexed": true, "internalType": "uint256", "name": "marketId", "type": "uint256" },
+      { "indexed": true, "internalType": "address", "name": "user",     "type": "address" }
     ],
     "name": "BetPlaced",
     "type": "event"

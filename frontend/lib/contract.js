@@ -63,7 +63,9 @@ export async function getWalletBalance(address) {
 
 export async function fetchAllMarkets() {
   try {
-    const provider = getProvider() || new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_RPC_URL || "https://eth-sepolia.g.alchemy.com/v2/6bpeBPNEvCICTalrvCRnC");
+    const provider = getProvider() || new ethers.JsonRpcProvider(
+      process.env.NEXT_PUBLIC_RPC_URL || "https://ethereum-sepolia-rpc.publicnode.com"
+    );
     const contract = getContract(provider);
     const count    = await contract.marketCount();
     const markets  = [];
@@ -108,31 +110,21 @@ export async function getUserBetStatus(marketId, userAddress) {
   }
 }
 
-// ── FIXED: accepts pre-encrypted data from BettingModal ──────────────────────
 export async function placeBet(marketId, amountEth, choice, userAddress, encryptedData) {
   const signer          = await getSigner();
   const contract        = getContract(signer);
   const contractAddress = CONTRACT_ADDRESS || process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
 
-  if (!contractAddress)  throw new Error("Contract address missing");
-  if (!userAddress)      throw new Error("Wallet address missing");
-  if (!encryptedData)    throw new Error("Encrypted data missing — encryption step not completed");
+  if (!contractAddress) throw new Error("Contract address missing");
+  if (!userAddress)     throw new Error("Wallet address missing");
+  if (!encryptedData)   throw new Error("Encrypted data missing — encryption step not completed");
 
-  // ✅ Use pre-encrypted data passed from BettingModal (real FHEVM ciphertexts)
-  const encryptedAmount = ethers.hexlify(
-    encryptedData.encryptedAmount.length === 32
-      ? encryptedData.encryptedAmount
-      : encryptedData.encryptedAmount.slice(0, 32)
-  );
-
-  const encryptedChoice = ethers.hexlify(
-    encryptedData.encryptedChoice.length === 32
-      ? encryptedData.encryptedChoice
-      : encryptedData.encryptedChoice.slice(0, 32)
-  );
-
-  const amountProof = ethers.hexlify(encryptedData.amountProof);
-  const choiceProof = ethers.hexlify(encryptedData.choiceProof);
+  // ✅ FIXED — pass handles directly without slicing
+  // Real FHEVM handles are 32 bytes exactly, no need to slice
+  const encryptedAmount = ethers.hexlify(encryptedData.encryptedAmount);
+  const encryptedChoice = ethers.hexlify(encryptedData.encryptedChoice);
+  const amountProof     = ethers.hexlify(encryptedData.amountProof);
+  const choiceProof     = ethers.hexlify(encryptedData.choiceProof);
 
   const value = ethers.parseEther(amountEth.toString());
 
