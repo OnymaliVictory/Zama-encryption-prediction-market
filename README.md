@@ -6,7 +6,7 @@
 ---
 
 ## 🌐 Live Demo
-**[https://zama-encryption-prediction-market.vercel.app](https://zama-encryption-prediction-market.vercel.app)**
+**[https://zama-encryption-prediction-market.vercel.app](https://zero-know-encryption-prediction-market.vercel.app)**
 
 ## 📝 Smart Contract (Sepolia Testnet)
 **Address:** `0x2e126c083C47a4Fd547eD4d7E435f989D823BAE1`
@@ -81,7 +81,7 @@ function placeBet(
 
 ## 🔍 Verify Privacy Yourself
 
-1. Place a bet on the **[live demo](https://zama-encryption-prediction-market.vercel.app)**
+1. Place a bet on the **[live demo](https://zero-know-encryption-prediction-market.vercel.app)**
 2. Copy your transaction hash from MetaMask
 3. Go to [sepolia.etherscan.io](https://sepolia.etherscan.io) and paste the hash
 4. Click the **Input Data** tab
@@ -110,7 +110,7 @@ This proves the encryption works. No plaintext ever hits the blockchain.
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/OnymaliVictory/Zama-encryption-prediction-market.git
+git clone https://github.com/OnymaliVictory/Zero-know-encryption-prediction-market
 cd Zama-encryption-prediction-market
 
 # 2. Install contract dependencies
